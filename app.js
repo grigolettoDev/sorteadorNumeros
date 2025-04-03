@@ -14,7 +14,7 @@ function sortear(){
         let numerosSorteados = gerandoNumeros(quantidade,de,ate);
         let textoNumerosGerados = (quantidade>1) ? `Números gerados: ${numerosSorteados}`: `Número gerado: ${numerosSorteados}`;
         enviaValores("resultado",textoNumerosGerados);
-        habilitaReiniciar("btn-reiniciar","container__botao");
+        habilitaReiniciar("btn-reiniciar");
         ajustaErroPreenchimento();
     }
 }
@@ -55,17 +55,21 @@ function enviaValores(id,texto){
 
 }
 //Muda a cor do botão do habilitar
-function habilitaReiniciar(id,classe){
+function habilitaReiniciar(id){
     let btReiniciar =  document.getElementById(id);
-    btReiniciar.innerHTML = "";
-    btReiniciar.innerHTML = `<button onclick="reiniciar()" id="btn-reiniciar" class=${classe}>Reiniciar</button>`;
+    if(btReiniciar.classList.contains("container__botao-desabilitado")){
+        btReiniciar.classList.remove("container__botao-desabilitado");
+        btReiniciar.classList.add("container__botao");
+    } else{
+        btReiniciar.classList.add("container__botao-desabilitado");
+    }
 }
 //Limpa e habilita o reiniciar
 function reiniciar(){
     apagaValores("quantidade");
     apagaValores("de");
     apagaValores("ate");
-    habilitaReiniciar("btn-reiniciar","container__botao-desabilitado");
+    habilitaReiniciar("btn-reiniciar");
     enviaValores("resultado","Números sorteados: nenhum até agora");
 }
 //Apaga os valores conforme id
