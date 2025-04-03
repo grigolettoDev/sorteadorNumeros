@@ -18,14 +18,14 @@ function sortear(){
         ajustaErroPreenchimento();
     }
 }
-
+//Pega valores do usuário com base no id
 function pegandoValores(id){
     let elementoHtml = document.getElementById(id);
     let valor = elementoHtml.value;
     valor = parseInt(valor);
     return valor;
 }
-
+//Gera números conforme preenchimento do usuário
 function gerandoNumeros(qtdTotal,valorMinimo,valorMaximo){
 
     let numerosGerados = [];
@@ -35,7 +35,7 @@ function gerandoNumeros(qtdTotal,valorMinimo,valorMaximo){
     while(qtdNumerosGerados<qtdTotal){
 
         numeroGerado = Math.floor(Math.random() * (valorMaximo - valorMinimo + 1)) + valorMinimo;
-
+        //Não gera valores repetidos
         if(numerosGerados.includes(numeroGerado)){
             continue;
         } else{
@@ -47,20 +47,20 @@ function gerandoNumeros(qtdTotal,valorMinimo,valorMaximo){
 
     return numerosGerados;
 }
-
+//Envia valores para a interface do usário
 function enviaValores(id,texto){
 
     let elementoNumSorteados = document.getElementById(id)
     elementoNumSorteados.innerHTML=`<label class="texto__paragrafo">${texto}</label>`;
 
 }
-
+//Muda a cor do botão do habilitar
 function habilitaReiniciar(id,classe){
     let btReiniciar =  document.getElementById(id);
     btReiniciar.innerHTML = "";
     btReiniciar.innerHTML = `<button onclick="reiniciar()" id="btn-reiniciar" class=${classe}>Reiniciar</button>`;
 }
-
+//Limpa e habilita o reiniciar
 function reiniciar(){
     apagaValores("quantidade");
     apagaValores("de");
@@ -68,17 +68,17 @@ function reiniciar(){
     habilitaReiniciar("btn-reiniciar","container__botao-desabilitado");
     enviaValores("resultado","Números sorteados: nenhum até agora");
 }
-
+//Apaga os valores conforme id
 function apagaValores(id){
     let valorApagar = document.getElementById(id);
     valorApagar.value = "";
 }
-
+//Muda titulo para erro
 function erroPreenchimento(){
     let titulo = document.querySelector("h1");
     titulo.innerHTML = `<h1>Erro<span class="container__texto-azul"> de preenchimento</span></h1>`
 }
-
+//Retorna o titulo
 function ajustaErroPreenchimento(){
     let titulo = document.querySelector("h1");
     titulo.innerHTML = `<h1>Sorteador<span class="container__texto-azul"> de números</span></h1>`
