@@ -6,11 +6,17 @@ function sortear(){
     console.log(quantidade);
     console.log(de);
     console.log(ate);
-    let numerosSorteados = gerandoNumeros(quantidade,de,ate);
-    console.log(numerosSorteados);
-    let textoNumerosGerados = `Números gerados: ${numerosSorteados}`;
-    enviaValores("resultado",textoNumerosGerados);
 
+    if (isNaN(quantidade) || isNaN(de) || isNaN(ate)){
+        erroPreenchimento();
+
+    } else{
+        let numerosSorteados = gerandoNumeros(quantidade,de,ate);
+        let textoNumerosGerados = (quantidade>1) ? `Números gerados: ${numerosSorteados}`: `Número gerado: ${numerosSorteados}`;
+        enviaValores("resultado",textoNumerosGerados);
+        habilitaReiniciar("btn-reiniciar","container__botao");
+        ajustaErroPreenchimento();
+    }
 }
 
 function pegandoValores(id){
@@ -47,4 +53,33 @@ function enviaValores(id,texto){
     let elementoNumSorteados = document.getElementById(id)
     elementoNumSorteados.innerHTML=`<label class="texto__paragrafo">${texto}</label>`;
 
+}
+
+function habilitaReiniciar(id,classe){
+    let btReiniciar =  document.getElementById(id);
+    btReiniciar.innerHTML = "";
+    btReiniciar.innerHTML = `<button onclick="reiniciar()" id="btn-reiniciar" class=${classe}>Reiniciar</button>`;
+}
+
+function reiniciar(){
+    apagaValores("quantidade");
+    apagaValores("de");
+    apagaValores("ate");
+    habilitaReiniciar("btn-reiniciar","container__botao-desabilitado");
+    enviaValores("resultado","Números sorteados: nenhum até agora");
+}
+
+function apagaValores(id){
+    let valorApagar = document.getElementById(id);
+    valorApagar.value = "";
+}
+
+function erroPreenchimento(){
+    let titulo = document.querySelector("h1");
+    titulo.innerHTML = `<h1>Erro<span class="container__texto-azul"> de preenchimento</span></h1>`
+}
+
+function ajustaErroPreenchimento(){
+    let titulo = document.querySelector("h1");
+    titulo.innerHTML = `<h1>Sorteador<span class="container__texto-azul"> de números</span></h1>`
 }
