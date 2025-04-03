@@ -8,6 +8,8 @@ function sortear(){
     console.log(ate);
     let numerosSorteados = gerandoNumeros(quantidade,de,ate);
     console.log(numerosSorteados);
+    let textoNumerosGerados = `Números gerados: ${numerosSorteados}`;
+    enviaValores("resultado",textoNumerosGerados);
 
 }
 
@@ -38,4 +40,11 @@ function gerandoNumeros(qtdTotal,valorMinimo,valorMaximo){
     }
 
     return numerosGerados;
+}
+
+function enviaValores(id,texto){
+
+    let elementoNumSorteados = document.getElementById(id)
+    elementoNumSorteados.innerHTML=`<label class="texto__paragrafo">${texto}</label>`;
+
 }
